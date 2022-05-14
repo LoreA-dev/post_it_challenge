@@ -1,0 +1,11 @@
+.textBox, .pText{
+    background: none;
+    border: none;
+    text-align: center; 
+    width: 140px;
+    height: 146px;
+    margin: 0 auto;
+    outline-style: none;
+    font-size: 2rem;
+    resize: none;
+}
