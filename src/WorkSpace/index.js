@@ -1,6 +1,7 @@
 import React from "react";
 import { DataNote } from "../DataNote";
 import './style.css';
+import {TrashComponent} from "../TrashComponent";
 
 function WorkSpace(){
     
@@ -23,7 +24,6 @@ function WorkSpace(){
   
   const createPostIt = (evt)=>{
     console.log(evt)
-    console.log(evt.clientY)
     const newArray = [...parsedPostIt]
     newArray.push({
       id: (newArray.length + 1) + Date.now(),
@@ -41,21 +41,28 @@ function WorkSpace(){
 
 
   // Drag & Drop
-    function handleDrag (evt){
-    const takingPostIt = postIt.map(()=>({
-        ...parsedPostIt,
-        x: evt.clientX,
-        y: evt.clientY 
-      }))
+    function handleDrag (id ,evt){
+    const takingPostIt = postIt.map(e =>{
+      if (e.id === id){
+        return {
+          ...e,
+          x: evt.clientX,
+          y: evt.clientY 
+        }
+    }else{return e}
+  })
     savePostIt(takingPostIt);
+    console.log(parsedPostIt);
+    console.log(takingPostIt);
     console.log(evt.clientX ,evt.clientY)
     }
 
     return(
         <div onDoubleClick ={createPostIt} id='workSpace'>
             {postIt.map((e)=>( 
-            <DataNote onDelete={() => deletePostIt(e.id)} id={e.id} updatePosition={handleDrag} key={e.id +"posit"} text={e.text} positionX={e.x} positionY={e.y}/>)
-            )}
+            <DataNote onDelete={() => deletePostIt(e.id)} id={e.id} updatePosition={handleDrag} key={e.id +"posit"} text={e.text} positionX={e.x} positionY={e.y}/>
+            ))}
+            <TrashComponent />
         </div>
     )
 }
