@@ -1,0 +1,22 @@
+#closeModal{
+    color: red;
+    font-size: 2.5rem;
+    float: right;
+}
+.trashModal{
+    position: absolute;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid grey;
+    background: #f7fcfce7;
+    width: 500px;
+    height: 500px;
+}
+.trashModal .modalContent{
+    align-items: center;
+    justify-content: center;
+}
+button{
+    border: none;
+    background: none;
+}
