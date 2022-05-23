@@ -34,13 +34,12 @@ function WorkSpace() {
 
   // const [deletedElement, setDeletedElement] = React.useState([]);
 
-  function deletePostIt(id, evt) {
-    console.log(id);
-    const postItToDelete = parsedPostIt.filter((postIts) => postIts.id === id);
+  function deletePostIt(evt) { //onDrop 
+    evt.preventDefault()
+    const id = +(evt.dataTransfer.getData("myid")); 
+    const postItToDelete = parsedPostIt.filter((postIts) => postIts.id !== id);
     savePostIt(postItToDelete);
 
-    // evt.preventDefault();
-    // console.log(deletedPostItArray);
   }
 
   const permanentlyDeletePostIt = (id) => {
@@ -77,7 +76,7 @@ function WorkSpace() {
           positionY={e.y}
         />
       ))}
-      <TrashComponent onDelete={() => deletePostIt()} />
+      <TrashComponent onDelete={deletePostIt} />
     </div>
   );
 }
