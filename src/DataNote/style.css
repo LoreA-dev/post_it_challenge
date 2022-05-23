@@ -9,7 +9,7 @@
     font-size: 2rem;
     resize: none;
 }
-#deletePostItButton{
+.deletePostItButton{
     border: none;
     background: none;
     font-size: 2rem;
