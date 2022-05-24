@@ -1,12 +1,8 @@
-import React from 'react';
-import './App.css';
-import { WorkSpace } from './WorkSpace';
-
+import React from "react";
+import "./App.css";
+import { WorkSpace } from "./WorkSpace";
 
 function App() {
-  
-  
-  
   return (
     <div className="App">
       <WorkSpace />
@@ -15,4 +11,3 @@ function App() {
 }
 
 export default App;
-
