@@ -12,11 +12,21 @@
     width: 500px;
     height: 500px;
 }
+.modalContent{
+    display: inline-block;
+}
 .trashModal .modalContent{
     align-items: center;
     justify-content: center;
 }
-button{
+.trashModal{
+    overflow-y: auto;
+}
+/* button{
+    border: none;
+    background: none;
+} */
+.emptyButton{
     border: none;
     background: none;
 }

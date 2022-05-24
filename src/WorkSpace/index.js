@@ -25,26 +25,61 @@ function WorkSpace() {
     const newArray = [...parsedPostIt];
     newArray.push({
       id: newArray.length + 1 + Date.now(),
-      text: "",
+      text: "hello",
       x: evt.clientX,
       y: evt.clientY,
     });
     savePostIt(newArray);
   };
 
-  // const [deletedElement, setDeletedElement] = React.useState([]);
 
-  function deletePostIt(evt) { //onDrop 
-    evt.preventDefault()
-    const id = +(evt.dataTransfer.getData("myid")); 
-    const postItToDelete = parsedPostIt.filter((postIts) => postIts.id !== id);
-    savePostIt(postItToDelete);
+  // Local Storage for deleted post its
+  const localStorageDeletedPostIt = localStorage.getItem("DELETEDPOSTITS_V1");
 
+  let parsedDeletedPostIt;
+  if (!localStorageDeletedPostIt) {
+    localStorage.setItem("DELETEDPOSTITS_V1", JSON.stringify([]));
+    parsedDeletedPostIt = [];
+  } else {
+    parsedDeletedPostIt = JSON.parse(localStorageDeletedPostIt);
   }
 
-  const permanentlyDeletePostIt = (id) => {
-    const postItToDelete = postIt.filter((postIts) => postIts.id !== id);
+  const [deletedPostIt, setDeletedPostIt] = React.useState(parsedDeletedPostIt);
+
+  const saveDeletedPostIt = (deletedPostIts) => {
+    const stringifiedDeletedPostIt = JSON.stringify(deletedPostIts);
+    localStorage.setItem("DELETEDPOSTITS_V1", stringifiedDeletedPostIt);
+    setDeletedPostIt(deletedPostIts);
+  };
+
+
+  function deletePostIt(evt) {
+    //onDrop
+    evt.preventDefault();
+    const id = +evt.dataTransfer.getData("myid");
+    const postItToDelete = parsedPostIt.filter((postIts) => postIts.id !== id);
+
     savePostIt(postItToDelete);
+
+    //Create array for deleted post its
+    const newArray = deletedPostIt;
+    const filterDeletedPostIt = parsedPostIt.find(
+      (postIts) => postIts.id === id
+    );
+
+    newArray.push(filterDeletedPostIt);
+    saveDeletedPostIt(newArray);
+    console.log(newArray);
+  }
+
+  function makeArrayEmpty(id){
+    const emptyArray = deletedPostIt.filter((postIts) => postIts.id === id); 
+    console.log(emptyArray);
+  }
+
+  const permanentlyDeletePostIt = (evt, id) => {
+    const postItToDelete = deletedPostIt.filter((postIts) => postIts.id !== id);
+    saveDeletedPostIt(postItToDelete);
   };
 
   // Drag & Drop
@@ -67,7 +102,7 @@ function WorkSpace() {
     <div onDoubleClick={createPostIt} id="workSpace">
       {postIt.map((e) => (
         <DataNote
-          onDelete={() => permanentlyDeletePostIt(e.id)}
+          draggable={true}
           id={e.id}
           updatePosition={handleDrag}
           key={e.id + "posit"}
@@ -76,7 +111,12 @@ function WorkSpace() {
           positionY={e.y}
         />
       ))}
-      <TrashComponent onDelete={deletePostIt} />
+      <TrashComponent
+        emptyArray ={makeArrayEmpty}
+        deletedArray={deletedPostIt}
+        onDelete={deletePostIt}
+        onPermanentlyDeletePostIt={permanentlyDeletePostIt}
+      />
     </div>
   );
 }
