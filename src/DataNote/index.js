@@ -4,19 +4,26 @@ import "./style.css";
 function DataNote({
   id,
   text,
+  updateText,
   positionX,
   positionY,
   updatePosition,
   onDelete,
   draggable,
 }) {
-  const [editable, setEditable] = React.useState(true);
-  const [saveInformation, setSaveInformation] = React.useState("");
+  const [toggleTextArea, setToggleTextArea] = React.useState(text === "");
+  const [information, setInformation] = React.useState("");
 
+  let canEdit = !draggable 
+    ? false 
+    : draggable && toggleTextArea
+      ? true 
+      : false
+  console.log({canEdit,draggable, text, toggleTextArea} )
   const onDragElement = (evt) => {
     evt.dataTransfer.setData("myid", id);
   };
-  const dragableopt = {
+  const dragableOpt = {
     onDragStart: onDragElement,
     draggable: true,
     onDragEnd: (evt) => updatePosition(id, evt),
@@ -26,13 +33,17 @@ function DataNote({
       position: "absolute",
     },
   };
+  const saveText = ()=>{
+    setToggleTextArea(!toggleTextArea);
+    updateText(id, information);
+  }
 
   const noDrag = {
     style: { display: "inline-block" },
   };
   return (
     <div
-      {...(draggable ? dragableopt : noDrag)}
+      {...(draggable ? dragableOpt : noDrag)}
       className="newPostIt"
       id={"note_" + id}
       onDoubleClick={(evt) => {
@@ -44,20 +55,20 @@ function DataNote({
           <i className="fas fa-times"></i>
         </button>
       )}
-      {!editable ? (
-        <p className="pText">{text}</p>
+      {!canEdit ? (
+        <p onClick={() =>setToggleTextArea(!toggleTextArea)} className="pText" >{text}</p>
       ) : (
         <textarea
-          onChange={(evt) => setSaveInformation(evt.target.defaultValue)}
+          defaultValue={text}
+          onChange={(evt) => setInformation(evt.target.value)}
           maxLength="70"
           autoCapitalize="sentences"
           className="textBox"
           onKeyDown={(e) => {
-            if (e.code === "Enter") {
-              setEditable(!editable);
+            if (["Enter", "NumpadEnter"].includes(e.code) && information !== "" ) {
+              saveText()
             }
           }}
-          defaultValue={text}
         ></textarea>
       )}
     </div>

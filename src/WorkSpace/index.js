@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import { DataNote } from "../DataNote";
 import "./style.css";
 import { TrashComponent } from "../TrashComponent";
@@ -25,7 +25,7 @@ function WorkSpace() {
     const newArray = [...parsedPostIt];
     newArray.push({
       id: newArray.length + 1 + Date.now(),
-      text: "hello",
+      text: "",
       x: evt.clientX,
       y: evt.clientY,
     });
@@ -69,18 +69,26 @@ function WorkSpace() {
 
     newArray.push(filterDeletedPostIt);
     saveDeletedPostIt(newArray);
-    console.log(newArray);
-  }
-
-  function makeArrayEmpty(id){
-    const emptyArray = deletedPostIt.filter((postIts) => postIts.id === id); 
-    console.log(emptyArray);
   }
 
   const permanentlyDeletePostIt = (evt, id) => {
     const postItToDelete = deletedPostIt.filter((postIts) => postIts.id !== id);
     saveDeletedPostIt(postItToDelete);
   };
+
+  function editText(id,text){
+      const updatingText = postIt.map((postIts) => {
+        if (postIts.id === id) {
+          return {
+            ...postIts,
+            text: text
+          };
+        } else {
+          return postIts;
+        }
+      });
+      savePostIt(updatingText);
+    }
 
   // Drag & Drop
   function handleDrag(id, evt) {
@@ -102,6 +110,7 @@ function WorkSpace() {
     <div onDoubleClick={createPostIt} id="workSpace">
       {postIt.map((e) => (
         <DataNote
+          updateText={editText}
           draggable={true}
           id={e.id}
           updatePosition={handleDrag}
@@ -112,7 +121,7 @@ function WorkSpace() {
         />
       ))}
       <TrashComponent
-        emptyArray ={makeArrayEmpty}
+        emptyArray ={() => saveDeletedPostIt([])}
         deletedArray={deletedPostIt}
         onDelete={deletePostIt}
         onPermanentlyDeletePostIt={permanentlyDeletePostIt}

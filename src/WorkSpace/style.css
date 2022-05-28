@@ -1,11 +1,4 @@
-.newPostIt{
-    background: #fef68a;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    border-radius: 4px;
-    box-shadow: 0.3px 0.3px 3px 0.1px;
-}
+
 #workSpace{
     position: relative;
     height: 100vh;
