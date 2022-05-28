@@ -14,7 +14,7 @@ function TrashModal(props) {
       }}
       className="trashModal"
     >
-      <button id="emptyButton" onClick={props.makeArrayEmpty}>
+      <button id="emptyButton" onClick={props.emptyArray}>
         Empty
       </button>
       <button onClick={props.onClose} id="closeModal">

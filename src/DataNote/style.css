@@ -5,9 +5,21 @@
     width: 140px;
     height: 146px;
     margin: 0 auto;
+    padding: 5px;
     outline-style: none;
     font-size: 2rem;
     resize: none;
+}
+.pText{
+    word-break: break-all;
+}
+.newPostIt{
+    background: #fef68a;
+    width: 150px;
+    height: 150px;
+    margin: 5 auto;
+    border-radius: 4px;
+    border: 1px solid #beb7b7;
 }
 .deletePostItButton{
     border: none;
