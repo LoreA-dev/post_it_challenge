@@ -76,6 +76,15 @@ function WorkSpace() {
     saveDeletedPostIt(postItToDelete);
   };
 
+  function restorePostIt(id){
+    const restoringPostIt = deletedPostIt.find((postIts) => postIts.id === id);
+    const postItToDelete = deletedPostIt.filter((postIts) => postIts.id !== id);
+
+    saveDeletedPostIt(postItToDelete);
+    savePostIt([...postIt, restoringPostIt]);
+
+  }
+
   function editText(id,text){
       const updatingText = postIt.map((postIts) => {
         if (postIts.id === id) {
@@ -118,6 +127,7 @@ function WorkSpace() {
           text={e.text}
           positionX={e.x}
           positionY={e.y}
+          restoredPostIt={restorePostIt}
         />
       ))}
       <TrashComponent
@@ -125,6 +135,7 @@ function WorkSpace() {
         deletedArray={deletedPostIt}
         onDelete={deletePostIt}
         onPermanentlyDeletePostIt={permanentlyDeletePostIt}
+        restorePostIt={restorePostIt}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { TrashModal } from "./TrashModal";
 import "./style.css";
 
-function TrashComponent({ onDelete, deletedArray, onPermanentlyDeletePostIt, emptyArray }) {
+function TrashComponent({ onDelete, deletedArray, onPermanentlyDeletePostIt,restorePostIt , emptyArray }) {
   const [show, setShow] = React.useState(false);
 
   return (
@@ -22,6 +22,7 @@ function TrashComponent({ onDelete, deletedArray, onPermanentlyDeletePostIt, emp
         <i className="far fa-trash-alt"></i>
       </button>
       <TrashModal
+        restorePostIt={restorePostIt}
         emptyArray ={emptyArray}
         onPermanentlyDeletePostIt={onPermanentlyDeletePostIt}
         deletedArray={deletedArray}
