@@ -10,6 +10,7 @@ function DataNote({
   updatePosition,
   onDelete,
   draggable,
+  restorePostIt
 }) {
   const [toggleTextArea, setToggleTextArea] = React.useState(text === "");
   const [information, setInformation] = React.useState("");
@@ -19,7 +20,6 @@ function DataNote({
     : draggable && toggleTextArea
       ? true 
       : false
-  console.log({canEdit,draggable, text, toggleTextArea} )
   const onDragElement = (evt) => {
     evt.dataTransfer.setData("myid", id);
   };
@@ -51,9 +51,12 @@ function DataNote({
       }}
     >
       {draggable ? null : (
+        <>
         <button className="deletePostItButton" onClick={(evt)=>onDelete(evt, id)}>
           <i className="fas fa-times"></i>
         </button>
+        <button onClick={() => restorePostIt(id)} >Restore</button>
+        </>
       )}
       {!canEdit ? (
         <p onClick={() =>setToggleTextArea(!toggleTextArea)} className="pText" >{text}</p>

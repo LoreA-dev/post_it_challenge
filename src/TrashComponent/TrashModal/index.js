@@ -23,6 +23,7 @@ function TrashModal(props) {
       <div className="modalContent">
         {props.deletedArray.map((postIts) => (
           <DataNote
+            restorePostIt={props.restorePostIt}
             draggable={false}
             key={postIts.id + "posit"}
             text={postIts.text}
