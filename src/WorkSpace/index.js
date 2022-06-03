@@ -1,6 +1,5 @@
   import React from "react";
 import { DataNote } from "../DataNote";
-import "./style.css";
 import { TrashComponent } from "../TrashComponent";
 
 function WorkSpace() {
@@ -116,7 +115,7 @@ function WorkSpace() {
   }
 
   return (
-    <div onDoubleClick={createPostIt} id="workSpace">
+    <div onDoubleClick={createPostIt} id="workSpace" className="relative h-screen w-screen overflow-hidden">
       {postIt.map((e) => (
         <DataNote
           updateText={editText}
