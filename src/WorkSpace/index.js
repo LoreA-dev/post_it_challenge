@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import { DataNote } from "../DataNote";
 import { TrashComponent } from "../TrashComponent";
 
@@ -31,7 +31,6 @@ function WorkSpace() {
     savePostIt(newArray);
   };
 
-
   // Local Storage for deleted post its
   const localStorageDeletedPostIt = localStorage.getItem("DELETEDPOSTITS_V1");
 
@@ -51,19 +50,18 @@ function WorkSpace() {
     setDeletedPostIt(deletedPostIts);
   };
 
-
   function deletePostIt(evt) {
-    //onDrop
+    // onDrop
     evt.preventDefault();
     const id = +evt.dataTransfer.getData("myid");
     const postItToDelete = parsedPostIt.filter((postIts) => postIts.id !== id);
 
     savePostIt(postItToDelete);
 
-    //Create array for deleted post its
+    // Create array for deleted post its
     const newArray = deletedPostIt;
     const filterDeletedPostIt = parsedPostIt.find(
-      (postIts) => postIts.id === id
+      (postIts) => postIts.id === id,
     );
 
     newArray.push(filterDeletedPostIt);
@@ -75,28 +73,26 @@ function WorkSpace() {
     saveDeletedPostIt(postItToDelete);
   };
 
-  function restorePostIt(id){
+  function restorePostIt(id) {
     const restoringPostIt = deletedPostIt.find((postIts) => postIts.id === id);
     const postItToDelete = deletedPostIt.filter((postIts) => postIts.id !== id);
 
     saveDeletedPostIt(postItToDelete);
     savePostIt([...postIt, restoringPostIt]);
-
   }
 
-  function editText(id,text){
-      const updatingText = postIt.map((postIts) => {
-        if (postIts.id === id) {
-          return {
-            ...postIts,
-            text: text
-          };
-        } else {
-          return postIts;
-        }
-      });
-      savePostIt(updatingText);
-    }
+  function editText(id, text) {
+    const updatingText = postIt.map((postIts) => {
+      if (postIts.id === id) {
+        return {
+          ...postIts,
+          text,
+        };
+      }
+      return postIts;
+    });
+    savePostIt(updatingText);
+  }
 
   // Drag & Drop
   function handleDrag(id, evt) {
@@ -107,9 +103,8 @@ function WorkSpace() {
           x: evt.clientX,
           y: evt.clientY,
         };
-      } else {
-        return postIts;
       }
+      return postIts;
     });
     savePostIt(takingPostIt);
   }
@@ -119,10 +114,10 @@ function WorkSpace() {
       {postIt.map((e) => (
         <DataNote
           updateText={editText}
-          draggable={true}
+          draggable
           id={e.id}
           updatePosition={handleDrag}
-          key={e.id + "posit"}
+          key={`${e.id}posit`}
           text={e.text}
           positionX={e.x}
           positionY={e.y}
@@ -130,7 +125,7 @@ function WorkSpace() {
         />
       ))}
       <TrashComponent
-        emptyArray ={() => saveDeletedPostIt([])}
+        emptyArray={() => saveDeletedPostIt([])}
         deletedArray={deletedPostIt}
         onDelete={deletePostIt}
         onPermanentlyDeletePostIt={permanentlyDeletePostIt}

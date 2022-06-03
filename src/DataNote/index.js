@@ -2,27 +2,15 @@ import React from "react";
 import "./style.css";
 
 function DataNote({
-  id,
-  text,
-  updateText,
-  positionX,
-  positionY,
-  updatePosition,
-  onDelete,
-  draggable,
-  restorePostIt
+  id, text, updateText, positionX, positionY, updatePosition, onDelete, draggable, restorePostIt,
 }) {
   const [toggleTextArea, setToggleTextArea] = React.useState(text === "");
   const [information, setInformation] = React.useState("");
 
-  let canEdit = !draggable 
-    ? false 
-    : draggable && toggleTextArea
-      ? true 
-      : false
-  const onDragElement = (evt) => {
-    evt.dataTransfer.setData("myid", id);
-  };
+  const canEdit = !draggable ? false : draggable && toggleTextArea ? true : false;
+
+  const onDragElement = (evt) => { evt.dataTransfer.setData("myid", id); };
+
   const dragableOpt = {
     onDragStart: onDragElement,
     draggable: true,
@@ -33,10 +21,10 @@ function DataNote({
       position: "absolute",
     },
   };
-  const saveText = ()=>{
+  const saveText = () => {
     setToggleTextArea(!toggleTextArea);
     updateText(id, information);
-  }
+  };
 
   const noDrag = {
     style: { display: "inline-block" },
@@ -45,21 +33,21 @@ function DataNote({
     <div
       {...(draggable ? dragableOpt : noDrag)}
       className="newPostIt"
-      id={"note_" + id}
+      id={`note_${id}`}
       onDoubleClick={(evt) => {
         evt.stopPropagation();
       }}
     >
       {draggable ? null : (
-        <>
-        <button className="deletePostItButton" onClick={(evt)=>onDelete(evt, id)}>
-          <i className="fas fa-times"></i>
-        </button>
-        <button onClick={() => restorePostIt(id)} >Restore</button>
-        </>
+        <div>
+          <button className="deletePostItButton" onClick={(evt) => onDelete(evt, id)}>
+            <i className="fas fa-times"></i>
+          </button>
+          <button onClick={() => restorePostIt(id)}>Restore</button>
+        </div>
       )}
       {!canEdit ? (
-        <p onClick={() =>setToggleTextArea(!toggleTextArea)} className="pText" >{text}</p>
+        <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText">{text}</p>
       ) : (
         <textarea
           defaultValue={text}
@@ -68,11 +56,12 @@ function DataNote({
           autoCapitalize="sentences"
           className="textBox"
           onKeyDown={(e) => {
-            if (["Enter", "NumpadEnter"].includes(e.code) && information !== "" ) {
-              saveText()
+            if (["Enter", "NumpadEnter"].includes(e.code) && information !== "") {
+              saveText();
             }
           }}
-        ></textarea>
+        >
+        </textarea>
       )}
     </div>
   );
