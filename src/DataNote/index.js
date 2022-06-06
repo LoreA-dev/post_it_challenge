@@ -1,5 +1,4 @@
 import React from "react";
-import "./style.css";
 
 function DataNote({
   id, text, updateText, positionX, positionY, updatePosition, onDelete, draggable, restorePostIt,
@@ -32,29 +31,31 @@ function DataNote({
   return (
     <div
       {...(draggable ? dragableOpt : noDrag)}
-      className="newPostIt"
+      className="newPostIt border border-gray-300 bg-yellow-200 w-60 h-60 m-2 rounded-md text-center text-3xl p-1 "
       id={`note_${id}`}
       onDoubleClick={(evt) => {
         evt.stopPropagation();
       }}
     >
       {draggable ? null : (
-        <div>
-          <button className="deletePostItButton" onClick={(evt) => onDelete(evt, id)}>
+        <div className=" m-2 float-right h-10 w-16 bg-red-300 z-10">
+          <button className="deletePostItButton text-3xl border-none bg-none cursor-pointer text-red-500 z-1" onClick={(evt) => onDelete(evt, id)}>
             <i className="fas fa-times"></i>
           </button>
-          <button onClick={() => restorePostIt(id)}>Restore</button>
+          <button className="text-2xl text-gray-400 hover:text-cyan-500" onClick={() => restorePostIt(id)}>
+            <i className="fas fa-trash-restore"></i>
+          </button>
         </div>
       )}
       {!canEdit ? (
-        <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText">{text}</p>
+        <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText bg-none break-all  border-0 w-56 h-56 m-px p-5 outline-none ">{text}</p>
       ) : (
         <textarea
           defaultValue={text}
           onChange={(evt) => setInformation(evt.target.value)}
-          maxLength="70"
+          maxLength="55"
           autoCapitalize="sentences"
-          className="textBox"
+          className="textBox bg-inherit border-0 text-center w-56 h-56 outline-none resize-none m-px p-5"
           onKeyDown={(e) => {
             if (["Enter", "NumpadEnter"].includes(e.code) && information !== "") {
               saveText();

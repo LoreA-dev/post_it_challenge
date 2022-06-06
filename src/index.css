@@ -16,3 +16,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.trashModal::-webkit-scrollbar-thumb{
+  background: #bcbfc4;
+  border-radius: 20px;
+}
+.trashModal::-webkit-scrollbar{
+  width: 9px;
+}
