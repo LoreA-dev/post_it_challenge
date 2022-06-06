@@ -15,10 +15,10 @@ function TrashModal(props) {
       onDoubleClick={(evt) => {
         evt.stopPropagation();
       }}
-      className="trashModal z-10 inline-block m-auto p-2.5 border-slate-300 w-3/5 h-3/5 bg-slate-100 overflow-y-auto items-center justify-center"
+      className="trashModal md:w-3/5 md:h-3/5 md:p-6 lg:w-4/6 lg:h-4/5 lg:p-8 z-10 inline-block m-auto p-1 border-slate-300 rounded-md w-4/5 h-4/5 bg-slate-100 overflow-y-auto items-center justify-center"
     >
-      <div className="flex justify-center">
-        <div className="buttonsContainer flex  fixed justify-between mx-6 w-3/6 h-12">
+      <div className="flex justify-center w-full">
+        <div className="buttonsContainer fixed justify-between mx-6 w-2/4 h-12 p-1 ">
           <button id="emptyButton" className=" border-none bg-none" onClick={emptyArray}>
             <i className="fas fa-eraser text-red-600 text-5xl" />
           </button>
@@ -26,7 +26,7 @@ function TrashModal(props) {
             <i className="fas fa-times" />
           </button>
         </div>
-        <div className="modalContent flex flex-wrap justify-center mt-12">
+        <div className="modalContent flex flex-wrap justify-center mt-12 p-1 touch-pan-y">
           {deletedArray.map((postIts) => (
             <DataNote
               restorePostIt={restorePostIt}
