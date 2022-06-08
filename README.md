@@ -11,6 +11,7 @@ In this project you can find the following technologies and libraries
   - airbnb style plugin
 - [React](https://es.reactjs.org/docs/create-a-new-react-app.html)
   - Create react app
+- [NodeJS](https://nodejs.org/es/download/)
 
 ## How to run it?
 First, you should clone the repository, and install all the libraries. Then, you can run it with: 
@@ -22,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### Deployment
 
-HEROKU HERE
+[Heroku Link](https://postits-project.herokuapp.com/)
 
 ## Feactures
 - Can create a new Post it
