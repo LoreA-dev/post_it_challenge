@@ -53,11 +53,11 @@ function DataNote({
     }
       {draggable ? null : (
         <div className="h-0 float-right mx-2.5">
-          <button className="deletePostItButton mr-3 text-4xl border-none bg-none cursor-pointer text-red-500 align-middle" onClick={(evt) => onDelete(evt, id)}>
-            <i className="fas fa-times"></i>
+          <button className="deletePostItButton mr-3 border-none bg-none cursor-pointer text-red-500" onClick={(evt) => onDelete(evt, id)}>
+            <i className="fas fa-times m:text-4xl text-4xl"></i>
           </button>
-          <button className="text-3xl text-gray-400 hover:text-cyan-500" onClick={() => restorePostIt(id)}>
-            <i className="fas fa-trash-restore"></i>
+          <button className="restorePostItButton text-gray-400 hover:text-cyan-500" onClick={() => restorePostIt(id)}>
+            <i className="fas fa-trash-restore m:text-2xl text-3xl"></i>
           </button>
         </div>
       )}
@@ -69,7 +69,7 @@ function DataNote({
           onChange={(evt) => setInformation(evt.target.value)}
           maxLength="55"
           autoCapitalize="sentences"
-          className="textBox bottom-12 md:static lg:static bg-transparent border-0 text-center w-56 h-60 outline-none resize-none m-px p-5"
+          className="textBox md:static lg:static bg-transparent border-0 text-center w-56 h-60 outline-none resize-none m-px p-5"
           onKeyDown={(e) => {
             if ((["Enter", "NumpadEnter"].includes(e.code) || e.keyCode === 13) && information !== "") {
               saveText();
