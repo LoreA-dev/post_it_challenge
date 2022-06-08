@@ -9,7 +9,6 @@ function TrashComponent({
       id="trashComponentContainer"
       className="flex justify-center h-full"
       onClick={() => setShow(false)}
-      onClose={() => setShow(false)}
     >
       <TrashModal
         restorePostIt={restorePostIt}

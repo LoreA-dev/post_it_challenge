@@ -88,6 +88,19 @@ function WorkSpace() {
     saveDeletedPostIt(newArray);
   }
 
+  const deletePostItMobile = (id) => {
+    const postItToDelete = postIt.filter((postIts) => postIts.id !== id);
+    savePostIt(postItToDelete);
+
+    const newArray = deletedPostIt;
+    const filterDeletedPostIt = parsedPostIt.find(
+      (postIts) => postIts.id === id,
+    );
+
+    newArray.push(filterDeletedPostIt);
+    saveDeletedPostIt(newArray);
+  };
+
   const permanentlyDeletePostIt = (evt, id) => {
     const postItToDelete = deletedPostIt.filter((postIts) => postIts.id !== id);
     saveDeletedPostIt(postItToDelete);
@@ -151,7 +164,7 @@ function WorkSpace() {
             positionY={e.y}
             backgroundColor={e.background}
             restoredPostIt={restorePostIt}
-            deletePostIt={deletePostIt}
+            deletePostItMobile={deletePostItMobile}
           />
         ))}
       <div
