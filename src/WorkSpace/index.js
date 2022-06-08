@@ -20,6 +20,25 @@ function WorkSpace() {
     setPostIt(newPostIts);
   };
 
+  const colors = {
+    names: {
+      lightred: "rgb(254, 202, 202)",
+      lightpurple: "rgb(233, 213, 255)",
+      lightblue: "rgb(191, 219, 254)",
+      lightgreen: "rgb(187, 247, 208)",
+      lightemerald: "rgb(167, 243, 208)",
+    },
+  };
+
+  function randomColor() {
+    const random = Math.floor(Math.random() * 6);
+    const values = (Object.values(colors.names));
+
+    const result = values[random];
+
+    return result;
+  }
+
   const createPostIt = (evt) => {
     const newArray = [...parsedPostIt];
     newArray.push({
@@ -27,6 +46,7 @@ function WorkSpace() {
       text: "",
       x: evt.clientX,
       y: evt.clientY,
+      background: `${randomColor()}`,
     });
     savePostIt(newArray);
   };
@@ -129,6 +149,7 @@ function WorkSpace() {
             text={e.text}
             positionX={e.x}
             positionY={e.y}
+            backgroundColor={e.background}
             restoredPostIt={restorePostIt}
             deletePostIt={deletePostIt}
           />

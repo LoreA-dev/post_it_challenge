@@ -2,7 +2,7 @@ import React from "react";
 
 function DataNote({
   id, text, updateText, positionX, positionY, updatePosition, onDelete, draggable,
-  restorePostIt,
+  restorePostIt, backgroundColor,
 }) {
   const [toggleTextArea, setToggleTextArea] = React.useState(text === "");
   const [information, setInformation] = React.useState("");
@@ -19,6 +19,7 @@ function DataNote({
       top: positionY,
       left: positionX,
       position: "absolute",
+      background: backgroundColor,
     },
   };
   const saveText = () => {
@@ -27,12 +28,15 @@ function DataNote({
   };
 
   const noDrag = {
-    style: { display: "inline-block" },
+    style: {
+      display: "inline-block",
+      background: backgroundColor,
+    },
   };
   return (
     <div
       {...(draggable ? dragableOpt : noDrag)}
-      className="newPostIt border border-gray-300 bg-yellow-200 w-60 h-60 m-2 rounded-md text-center text-3xl p-1 z-0 "
+      className="newPostIt border bg-yellow-200 border-gray-300 w-60 h-60 m-2 rounded-md text-center text-3xl p-1 z-0 "
       id={`note_${id}`}
       onDoubleClick={(evt) => {
         evt.stopPropagation();
@@ -56,7 +60,7 @@ function DataNote({
           onChange={(evt) => setInformation(evt.target.value)}
           maxLength="55"
           autoCapitalize="sentences"
-          className="textBox bg-inherit border-0 text-center w-56 h-56 outline-none resize-none m-px p-5"
+          className="textBox bg-transparent border-0 text-center w-56 h-56 outline-none resize-none m-px p-5"
           onKeyDown={(e) => {
             if (["Enter", "NumpadEnter"].includes(e.code) && information !== "") {
               saveText();
