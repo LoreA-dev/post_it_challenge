@@ -109,25 +109,55 @@ function WorkSpace() {
     savePostIt(takingPostIt);
   }
 
+  const [show, setShow] = React.useState(false);
+
   return (
-    <div onDoubleClick={createPostIt} id="workSpace" className="relative h-screen w-screen overflow-hidden">
-      {postIt.map((e) => (
-        <DataNote
-          updateText={editText}
-          draggable
-          id={e.id}
-          updatePosition={handleDrag}
-          key={`${e.id}posit`}
-          text={e.text}
-          positionX={e.x}
-          positionY={e.y}
-          restoredPostIt={restorePostIt}
-        />
-      ))}
+    <div
+      onDoubleClick={createPostIt}
+      id="workSpace"
+      className="relative h-screen w-screen overflow-hidden "
+    >
+      {postIt.length === 0
+        ? <p className="text-4xl font-light absolute text-center w-full p-2 bg-red-200 z-0">You do not have post its yet! Create one by double clicking</p>
+        : postIt.map((e) => (
+          <DataNote
+            updateText={editText}
+            draggable
+            id={e.id}
+            updatePosition={handleDrag}
+            key={`${e.id}posit`}
+            text={e.text}
+            positionX={e.x}
+            positionY={e.y}
+            restoredPostIt={restorePostIt}
+            deletePostIt={deletePostIt}
+          />
+        ))}
+      <div
+        onDoubleClick={(evt) => {
+          evt.stopPropagation();
+        }}
+        className="trashButtonContainer flex absolute bottom-0 right-0 justify-end items-end translate-x-px "
+      >
+        <span className=" absolute top-0.5 left-0.5 w-10 bg-red-500 font-bold text-white rounded-full p-1 text-2xl text-center select-none">{deletedPostIt.length}</span>
+        <button
+          onDrop={deletePostIt}
+          onDoubleClick={(evt) => {
+            evt.stopPropagation();
+          }}
+          onClick={() => setShow(true)}
+          onDragOver={(evt) => evt.preventDefault()}
+          id="buttonTrashComponent"
+          className="bg-none border-none m-10 hover:scale-125 transition motion-reduce:hover:scale-0"
+        >
+          <i className="far fa-trash-alt text-8xl text-red-500" />
+        </button>
+      </div>
       <TrashComponent
         emptyArray={() => saveDeletedPostIt([])}
+        show={show}
+        setShow={setShow}
         deletedArray={deletedPostIt}
-        onDelete={deletePostIt}
         onPermanentlyDeletePostIt={permanentlyDeletePostIt}
         restorePostIt={restorePostIt}
       />

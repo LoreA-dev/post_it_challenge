@@ -1,7 +1,8 @@
 import React from "react";
 
 function DataNote({
-  id, text, updateText, positionX, positionY, updatePosition, onDelete, draggable, restorePostIt,
+  id, text, updateText, positionX, positionY, updatePosition, onDelete, draggable,
+  restorePostIt,
 }) {
   const [toggleTextArea, setToggleTextArea] = React.useState(text === "");
   const [information, setInformation] = React.useState("");
@@ -31,15 +32,15 @@ function DataNote({
   return (
     <div
       {...(draggable ? dragableOpt : noDrag)}
-      className="newPostIt border border-gray-300 bg-yellow-200 w-60 h-60 m-2 rounded-md text-center text-3xl p-1 "
+      className="newPostIt border border-gray-300 bg-yellow-200 w-60 h-60 m-2 rounded-md text-center text-3xl p-1 z-0 "
       id={`note_${id}`}
       onDoubleClick={(evt) => {
         evt.stopPropagation();
       }}
     >
       {draggable ? null : (
-        <div className=" m-2 float-right h-10 w-16 bg-red-300 z-10">
-          <button className="deletePostItButton text-3xl border-none bg-none cursor-pointer text-red-500 z-1" onClick={(evt) => onDelete(evt, id)}>
+        <div className="h-0 float-right mx-2.5">
+          <button className="deletePostItButton mr-3 text-3xl border-none bg-none cursor-pointer text-red-500 align-middle" onClick={(evt) => onDelete(evt, id)}>
             <i className="fas fa-times"></i>
           </button>
           <button className="text-2xl text-gray-400 hover:text-cyan-500" onClick={() => restorePostIt(id)}>
@@ -48,7 +49,7 @@ function DataNote({
         </div>
       )}
       {!canEdit ? (
-        <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText bg-none break-all  border-0 w-56 h-56 m-px p-5 outline-none ">{text}</p>
+        <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText clear-left bg-none break-all border-0 w-56 h-56 m-px mt-1.5 p-5 outline-none">{text}</p>
       ) : (
         <textarea
           defaultValue={text}
