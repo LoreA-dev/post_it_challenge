@@ -19,6 +19,7 @@ module.exports = {
     "react",
   ],
   rules: {
+    "jsx-a11y/no-static-element-interactions": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-filename-extension": 0,
     "no-nested-ternary": 0,

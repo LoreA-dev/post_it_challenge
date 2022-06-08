@@ -24,3 +24,6 @@ code {
 .trashModal::-webkit-scrollbar{
   width: 9px;
 }
+#bgDivTrash{
+  background: rgba(0,0,0,0.3);
+}
