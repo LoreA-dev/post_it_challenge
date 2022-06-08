@@ -19,15 +19,15 @@ function TrashModal(props) {
         onDoubleClick={(evt) => {
           evt.stopPropagation();
         }}
-        className="trashModal md:w-3/5 md:h-3/5 md:p-6 lg:w-4/6 lg:h-4/5 lg:p-8 z-10 inline-block m-auto p-1 border-slate-300 rounded-2xl h-4/5 bg-slate-100 overflow-y-auto items-center justify-center"
+        className="trashModal md:w-3/5 md:h-3/5 md:p-6 lg:w-4/6 lg:h-4/5 lg:p-8 z-10 inline-block m-auto p-1 border-slate-200 rounded-2xl h-4/5 bg-slate-100 overflow-y-auto items-center justify-center"
       >
         <div
-          className="modalContent flex flex-wrap justify-center w-full"
+          className="modalContent flex flex-col justify-center w-full"
           onClick={(evt) => {
             evt.stopPropagation();
           }}
         >
-          <div className="modalButtonsContainer justify-between mx-6 w-3/4 h-10 p-1 ">
+          <div className="modalButtonsContainer justify-between mx-6 w-4/4 h-10 p-1 ">
             <button id="emptyButton" className=" border-none bg-none" onClick={emptyArray}>
               <i className="fas fa-eraser text-red-600 text-5xl" />
             </button>
@@ -42,6 +42,7 @@ function TrashModal(props) {
                 draggable={false}
                 key={`${postIts.id}posit`}
                 text={postIts.text}
+                backgroundColor={postIts.background}
                 id={postIts.id}
                 onDelete={onPermanentlyDeletePostIt}
               />
