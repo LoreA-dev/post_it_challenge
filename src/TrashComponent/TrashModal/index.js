@@ -19,7 +19,10 @@ function TrashModal(props) {
         onDoubleClick={(evt) => {
           evt.stopPropagation();
         }}
-        className="trashModal md:w-3/5 md:h-3/5 md:p-6 lg:w-4/6 lg:h-4/5 lg:p-8 z-10 inline-block m-auto p-1 border-slate-200 rounded-2xl h-4/5 bg-slate-100 overflow-y-auto items-center justify-center"
+        onClick={(evt) => {
+          evt.stopPropagation();
+        }}
+        className="trashModal md:w-3/5 md:h-3/5 md:p-6 lg:w-4/6 lg:h-4/5 lg:p-8 z-10 inline-block m-auto p-1 border-slate-200 rounded-2xl h-4/5 w-4/5 bg-slate-100 overflow-y-auto items-center justify-center"
       >
         <div
           className="modalContent flex flex-col justify-center w-full"
@@ -29,13 +32,13 @@ function TrashModal(props) {
         >
           <div className="modalButtonsContainer justify-between mx-6 w-4/4 h-10 p-1 ">
             <button id="emptyButton" className=" border-none bg-none" onClick={emptyArray}>
-              <i className="fas fa-eraser text-red-600 text-5xl" />
+              <i className="fas fa-eraser text-red-600 md:text-5xl text-6xl" />
             </button>
-            <button onClick={onClose} id="closeModal" className="text-red-600 text-5xl float-right">
+            <button onClick={onClose} id="closeModal" className="text-red-600 md:text-5xl text-6xl float-right">
               <i className="fas fa-times" />
             </button>
           </div>
-          <div className="modalBody flex flex-wrap justify-center mt-6 p-1 touch-pan-y">
+          <div className="modalBody flex flex-wrap justify-center md:mt-6 mt-8 p-1 touch-pan-y">
             {deletedArray.map((postIts) => (
               <DataNote
                 restorePostIt={restorePostIt}
