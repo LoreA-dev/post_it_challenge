@@ -1,8 +1,9 @@
 # PostIts project 
 
-The main objetive of this project is create post its by double clicking, them are saved on LocalStorage.\
-The project was created for an activity by Moove-it, and helps for show all knowledge learned.\
-This project has responsive desing.
+Use this application to create post-it to remind your pending activities, this project was developed because of the MooveIt Bootcamp challenge. \
+You don't need to have a Internet connection to save your data since is saved locally (Localstorage). \
+I Hope you like it! was made with 🧡
+
 
 ## Tech
 In this project you can find the following technologies and libraries
@@ -37,6 +38,7 @@ This project was deployed in Heroku, open the demo link below in your browser.\
 - Can permanently delete all Post its in the trash.
 - Can see if the trash has Post its by looking the trash icon.
 - All Post its in the workspace and trash are saved in LocalStorage.
+- This project has responsive desing.
 
 ## TODO
 - We can implement Redux for this project, and make all the components and feacture independient.
