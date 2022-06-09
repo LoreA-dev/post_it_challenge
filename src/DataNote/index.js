@@ -65,11 +65,12 @@ function DataNote({
         <p onClick={() => setToggleTextArea(!toggleTextArea)} className="pText clear-left bg-none break-all border-0 md:w-56 md:h-56 w-60 h-60 m-auto mt-3 p-5 outline-none">{text}</p>
       ) : (
         <textarea
+          placeholder="Press enter for save text.."
           defaultValue={text}
           onChange={(evt) => setInformation(evt.target.value)}
           maxLength="55"
           autoCapitalize="sentences"
-          className="textBox md:static lg:static bg-transparent border-0 text-center w-56 h-60 outline-none resize-none m-px p-5"
+          className="textBox placeholder:italic placeholder:text-slate-400 md:static lg:static bg-transparent border-0 text-center w-56 h-60 outline-none resize-none m-px p-5"
           onKeyDown={(e) => {
             if ((["Enter", "NumpadEnter"].includes(e.code) || e.keyCode === 13) && information !== "") {
               saveText();
