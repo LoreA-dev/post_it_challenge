@@ -24,7 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### Deployment
 
-This project was deployed in Heroku, open the demo link below in your browser.
+This project was deployed in Heroku, open the demo link below in your browser.\
 [DEMO Link](https://postits-project.herokuapp.com/)
 
 ## Feactures
